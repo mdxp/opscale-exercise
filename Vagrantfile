@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
           :mysql => {
             :tunable => {
               :"server-id" => node_num,
-            }
+            },
           :server_root_password => "",
           :server_repl_password => "repl_pw"
         }
