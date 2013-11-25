@@ -25,15 +25,18 @@ Vagrant.configure("2") do |config|
         chef.roles_path = "roles"
         chef.add_role(node_num == 1 ? 'master' : 'slave')
         chef.json = { 
-          localegen: {lang:['en_US','en_US.utf8']}, 
+          localegen: {
+            lang:['en_US','en_US.utf8']
+          }, 
           :mysql => {
             :tunable => {
               :"server-id" => node_num,
             },
-          :server_root_password => "",
-          :server_repl_password => "repl_pw"
+            :server_root_password => "",
+            :server_repl_password => "repl_pw"
+          }
         }
-      }
+      end
     end
   end
 end
