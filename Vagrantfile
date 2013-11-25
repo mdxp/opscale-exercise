@@ -17,16 +17,13 @@ Vagrant.configure("2") do |config|
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
   # your network.
-  
   config.vm.network :public_network
   
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
-  
   config.vm.provider :virtualbox do |vb|
 
      # Don't boot with headless mode
-
      vb.gui = true
   
      # Use VBoxManage to customize the VM. For example to change memory:
@@ -34,12 +31,11 @@ Vagrant.configure("2") do |config|
   end
   
   # Enable Berkshelf
-  # config.berkshelf.enabled=true
+  config.berkshelf.enabled=true
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
   # path, and data_bags path (all relative to this Vagrantfile), and adding
   # some recipes and/or roles.
-  
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "cookbooks"
     chef.roles_path = "roles"
