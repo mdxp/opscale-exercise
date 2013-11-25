@@ -25,7 +25,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "cookbooks"
     chef.add_recipe "locale-gen"
-    chef.add_recipe "mysql"
+    chef.add_recipe "mysql::server"
     chef.json = { 
       localegen: {lang:['en_US','en_US.utf8']}, 
       :mysql_password => "this-is-not-the-most-secure-password-in-existence" 
