@@ -19,6 +19,7 @@ Vagrant.configure("2") do |config|
       node_config.omnibus.chef_version = :latest
       node_config.berkshelf.enabled=true
       node_config.vm.provision :chef_solo do |chef|
+        chef.add_recipe "apt"
         chef.add_recipe "locale-gen"
         chef.add_recipe "mysql::server"
         chef.roles_path = "roles"
@@ -31,6 +32,7 @@ Vagrant.configure("2") do |config|
             :tunable => {
               :"server-id" => node_num,
             },
+            :server_debian_password => "",
             :server_root_password => "",
             :server_repl_password => "repl_pw"
           }
