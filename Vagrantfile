@@ -37,6 +37,7 @@ Vagrant.configure("2") do |config|
             :tunable => {
               :"server-id" => node_num,
             },
+            "allow_remote_root" => true,
             :server_debian_password => "",
             :server_root_password => "",
             :server_repl_password => "repl_pw",
