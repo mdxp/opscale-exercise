@@ -11,7 +11,7 @@ include_recipe "database::mysql"
 # create an initial datanase
 node[:db].each do |env, name|
   execute "create database #{name}" do
-    command "mysql -uroot -e 'create database if not exists #{name};'"
+    command "mysql -uroot -p#{node[:mysql][':server_root_password']} -e 'create database if not exists #{name};'"
     user "vagrant"
   end
 end
