@@ -19,7 +19,6 @@ Vagrant.configure("2") do |config|
       node_config.omnibus.chef_version = :latest
       node_config.berkshelf.enabled=true
       node_config.vm.provision :chef_solo do |chef|
-        chef.cookbooks_path = "cookbooks"
         chef.add_recipe "locale-gen"
         chef.add_recipe "mysql::server"
         chef.roles_path = "roles"
