@@ -15,17 +15,21 @@ Vagrant.configure("2") do |config|
       node_config.vm.box = node.to_s
       node_config.vm.box_url = "https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04-i386_provisionerless.box"
       node_config.vm.network "public_network"
-      node_config.vm.network :private_network, ip: "10.0.0.#{10 + node_num}"
+      node_config.vm.network "private_network", ip: "10.0.0.#{10 + node_num}"
       node_config.omnibus.chef_version = :latest
       node_config.berkshelf.enabled=true
       node_config.vm.provision :chef_solo do |chef|
+        chef.cookbooks_path = "cookbooks"
         chef.add_recipe "apt"
         chef.add_recipe "locale-gen"
         chef.add_recipe "vim"
         chef.add_recipe "mysql::server"
+        chef.add_recipe "orc-mysql"
+        chef.add_recipe "database::mysql"
         chef.roles_path = "roles"
         chef.add_role(node_num == 1 ? 'master' : 'slave')
         chef.json = { 
+          "development" => true,
           localegen: {
             lang:['en_US','en_US.utf8']
           }, 
@@ -35,7 +39,12 @@ Vagrant.configure("2") do |config|
             },
             :server_debian_password => "",
             :server_root_password => "",
-            :server_repl_password => "repl_pw"
+            :server_repl_password => "repl_pw",
+          },
+          "db" => {
+            "prod" => "db_prod",
+            "test" => "db_test",
+            "dev" => "db_dev"
           }
         }
       end
