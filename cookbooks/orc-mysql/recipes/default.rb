@@ -12,6 +12,6 @@ include_recipe "database::mysql"
 node[:db].each do |env, name|
   execute "create database #{name}" do
     command "mysql -uroot -e 'create database if not exists #{name};'"
-    # user "vagrant"
+    user "vagrant"
   end
 end
